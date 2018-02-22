@@ -1,3 +1,5 @@
+/*jshint esversion: 6 */
+
 import * as admin from "firebase-admin";
 import express from 'express';
 import fs from 'fs';
@@ -8,7 +10,7 @@ const app = express();
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://###.firebaseio.com"
+  databaseURL: "https://inatec-6d717.firebaseio.com"
 });
 
 app.get('/', (req, res) => {
@@ -31,7 +33,7 @@ function listAllUsers(nextPageToken) {
     });
     if (listUsersResult.pageToken) {
         // List next batch of users.
-        listAllUsers(listUsersResult.pageToken)
+        listAllUsers(listUsersResult.pageToken);
       }
     })
   .catch(function(error) {
