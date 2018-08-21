@@ -10,7 +10,7 @@ const app = express();
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://inatec-6d717.firebaseio.com"
+  databaseURL: "https://###.firebaseio.com"
 });
 
 app.get('/', (req, res) => {
@@ -28,7 +28,7 @@ function listAllUsers(nextPageToken) {
         console.log("Successfully deleted user");
       })
       .catch(function(error) {
-        console.log("Error deleting user:", error);
+        //console.log("Error deleting user:", error);
       });
     });
     if (listUsersResult.pageToken) {
@@ -37,7 +37,7 @@ function listAllUsers(nextPageToken) {
       }
     })
   .catch(function(error) {
-    console.log("Error listing users:", error);
+    //console.log("Error listing users:", error);
   });
 }
 // Start listing users from the beginning, 1000 at a time.
