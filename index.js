@@ -40,11 +40,26 @@ function listAllUsers(nextPageToken) {
     //console.log("Error listing users:", error);
   });
 }
-// Start listing users from the beginning, 1000 at a time.
+
+function clearTable(table) {
+  admin.database().ref(table).limitToLast(10).on("value", function(snapshot) {
+    for (var uid in snapshot.val()) {
+      console.log(uid)
+      admin.database().ref().child(table+'/' + uid + '/').remove();
+    }
+  }, function (errorObject) {
+    console.log("The read failed: " + errorObject.code);
+  });
+}
 
 app.get('/deleteusers', (req, res) => {
   res.send('Running.');
   listAllUsers();
+});
+
+app.get('/deletesessions', (req, res) => {
+  res.send('Running.');
+  clearTable("sessions");
 });
 
 app.listen(3000, () =>{
